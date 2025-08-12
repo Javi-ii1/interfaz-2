@@ -15,8 +15,8 @@ void loop() {
 }
 ```
 
-### Ejercicio n° 2: Semaforo en arduino
-https://www.tinkercad.com/things/eSsg0zNZNz3-semaforo
+### Ejercicio n° 2: [Semaforo en arduino](https://www.tinkercad.com/things/eSsg0zNZNz3-semaforo)
+
 ```js
 // C++ code - Semáforo Autos y Peatones
 
