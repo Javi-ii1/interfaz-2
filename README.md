@@ -1,4 +1,4 @@
-# Interfaz-2
+# Interfaz II
 ## Pagina del curso: https://mauricixx.github.io/Interfaces/
 ## Tinkercard: https://www.tinkercad.com/dashboard/designs/circuits
 
