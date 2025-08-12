@@ -1,5 +1,7 @@
 # interfaz-2
-###ejercicio n° 1 Arduino: "Hola, Mundo!"
+## pagina del curso: https://mauricixx.github.io/Interfaces/
+## tinkercard
+### ejercicio n° 1 Arduino: "Hola, Mundo!"
 
 ```js
 void setup() {
