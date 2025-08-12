@@ -63,7 +63,8 @@ void loop() {
   delay(2000); // 2 segundos
 }
 ```
-<a 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/semaforo.png" width="1024" height="550"> 
+
 ### Ejercicio n°3: luces led
 https://www.tinkercad.com/things/7s1vp2TdElV-luces-led
 ``` js
