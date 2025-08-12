@@ -63,10 +63,9 @@ void loop() {
   delay(2000); // 2 segundos
 }
 ```
-<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/semaforo.png" width="1024" height="550"> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/semaforo.png" width="1024" height="550"/> 
 
-### Ejercicio n°3: luces led
-https://www.tinkercad.com/things/7s1vp2TdElV-luces-led
+### Ejercicio n°3: [Luces led](https://www.tinkercad.com/things/7s1vp2TdElV-luces-led)
 ``` js
 void setup() {  // Configuración inicial (ej: pines como entrada/salida)
   pinMode(13, OUTPUT);  // Pin 13 como salida
@@ -85,10 +84,9 @@ void loop() {   // Se repite infinitamente
   //delay(1000);
 }
 ```
-<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/luces%20led.png" width="1024" height="550"> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/luces%20led.png" width="1024" height="550"/> 
 
-### Ejercicio n°4: Luz pulsador
-https://www.tinkercad.com/things/10ZiqF8U0UE-luz-pulsador
+### Ejercicio n°4: [Luz pulsador](https://www.tinkercad.com/things/10ZiqF8U0UE-luz-pulsador)
 ``` js
 void setup() {
   pinMode(2, INPUT);  // Botón como entrada
@@ -102,10 +100,9 @@ void loop() {
   }
 }
 ```
-<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/luz%20pulsador.png" width="1024" height="550"> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/luz%20pulsador.png" width="1024" height="550"/> 
 
-### Ejercicio n°5: Luz potenciometro
-https://www.tinkercad.com/things/dNm8kH4w4jz-led-potenciometro
+### Ejercicio n°5: [Luz potenciometro](https://www.tinkercad.com/things/dNm8kH4w4jz-led-potenciometro)
 ```js
 void setup() {
   pinMode(9, OUTPUT);  // Pin PWM (símbolo ~)
@@ -116,4 +113,4 @@ void loop() {
   analogWrite(9, brillo);               // Ajustar brillo
 }
 ```
-<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/led%20potenciometro.png" width="1024" height="550"> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/led%20potenciometro.png" width="1024" height="550"/> 
