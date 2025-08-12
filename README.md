@@ -1,7 +1,8 @@
 # interfaz-2
 ## pagina del curso: https://mauricixx.github.io/Interfaces/
 ## tinkercard
-### ejercicio n° 1 Arduino: "Hola, Mundo!"
+
+### Ejercicio n° 1 Arduino: "Hola, Mundo!"
 
 ```js
 void setup() {
@@ -14,7 +15,8 @@ void loop() {
 }
 ```
 
-### ejercicio n° 2: Semaforo en arduino
+### Ejercicio n° 2: Semaforo en arduino
+https://www.tinkercad.com/things/eSsg0zNZNz3-semaforo
 ```js
 // C++ code - Semáforo Autos y Peatones
 
@@ -63,7 +65,7 @@ void loop() {
 ```
 
 ### Ejercicio n°3: luces led
-https://www.tinkercad.com/dashboard/designs/circuits
+https://www.tinkercad.com/things/7s1vp2TdElV-luces-led
 ``` js
 void setup() {  // Configuración inicial (ej: pines como entrada/salida)
   pinMode(13, OUTPUT);  // Pin 13 como salida
@@ -84,7 +86,7 @@ void loop() {   // Se repite infinitamente
 ```
 
 ### Ejercicio n°4: Luz pulsador
-
+https://www.tinkercad.com/things/10ZiqF8U0UE-luz-pulsador
 ``` js
 void setup() {
   pinMode(2, INPUT);  // Botón como entrada
@@ -96,5 +98,18 @@ void loop() {
   } else {
     digitalWrite(13, LOW);
   }
+}
+```
+
+### Ejercicio n°5: Luz potenciometro
+https://www.tinkercad.com/things/dNm8kH4w4jz-led-potenciometro
+```js
+void setup() {
+  pinMode(9, OUTPUT);  // Pin PWM (símbolo ~)
+}
+void loop() {
+  int valor = analogRead(A0);           // Leer potenciómetro (0-1023)
+  int brillo = map(valor, 0, 1023, 0, 255);  // Convertir a rango PWM
+  analogWrite(9, brillo);               // Ajustar brillo
 }
 ```
