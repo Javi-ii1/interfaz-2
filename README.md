@@ -1,6 +1,6 @@
-# interfaz-2
-## pagina del curso: https://mauricixx.github.io/Interfaces/
-## tinkercard
+# Interfaz-2
+## Pagina del curso: https://mauricixx.github.io/Interfaces/
+## Tinkercard: https://www.tinkercad.com/dashboard/designs/circuits
 
 ### Ejercicio n° 1 Arduino: "Hola, Mundo!"
 
