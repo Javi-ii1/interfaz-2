@@ -85,6 +85,7 @@ void loop() {   // Se repite infinitamente
   //delay(1000);
 }
 ```
+<img src="" width="1024" height="550"> 
 
 ### Ejercicio n°4: Luz pulsador
 https://www.tinkercad.com/things/10ZiqF8U0UE-luz-pulsador
@@ -101,6 +102,7 @@ void loop() {
   }
 }
 ```
+<img src="" width="1024" height="550"> 
 
 ### Ejercicio n°5: Luz potenciometro
 https://www.tinkercad.com/things/dNm8kH4w4jz-led-potenciometro
@@ -114,3 +116,4 @@ void loop() {
   analogWrite(9, brillo);               // Ajustar brillo
 }
 ```
+<img src="" width="1024" height="550"> 
