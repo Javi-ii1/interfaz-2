@@ -63,6 +63,7 @@ void loop() {
 ```
 
 ### Ejercicio n°3: luces led
+https://www.tinkercad.com/dashboard/designs/circuits
 ``` js
 void setup() {  // Configuración inicial (ej: pines como entrada/salida)
   pinMode(13, OUTPUT);  // Pin 13 como salida
@@ -80,6 +81,20 @@ void loop() {   // Se repite infinitamente
   digitalWrite(8, LOW);
   //delay(1000);
 }
+```
 
-https://www.tinkercad.com/things/7s1vp2TdElV-luces-led
+### Ejercicio n°4: Luz pulsador
+
+``` js
+void setup() {
+  pinMode(2, INPUT);  // Botón como entrada
+  pinMode(13, OUTPUT);
+}
+void loop() {
+  if (digitalRead(2) == HIGH) {  // Si se presiona el botón
+    digitalWrite(13, HIGH);
+  } else {
+    digitalWrite(13, LOW);
+  }
+}
 ```
