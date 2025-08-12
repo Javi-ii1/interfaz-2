@@ -13,6 +13,7 @@ void loop() {
   // No es necesario poner nada en el loop para este ejemplo
 }
 ```
+
 ### ejercicio n° 2: Semaforo en arduino
 ```js
 // C++ code - Semáforo Autos y Peatones
@@ -59,4 +60,26 @@ void loop() {
   digitalWrite(LED_5, HIGH);  // Rojo peatones encendido
   delay(2000); // 2 segundos
 }
+```
+
+### Ejercicio n°3: luces led
+``` js
+void setup() {  // Configuración inicial (ej: pines como entrada/salida)
+  pinMode(13, OUTPUT);  // Pin 13 como salida
+  pinMode(8, OUTPUT);
+}
+
+void loop() {   // Se repite infinitamente
+  digitalWrite(13, HIGH);  // Encender LED
+  delay(1000);             // Esperar 1 segundo
+  digitalWrite(13, LOW);   // Apagar LED
+  //delay(1000);             // Esperar 1 segundo
+  
+  digitalWrite(8, HIGH);
+  delay(1000);
+  digitalWrite(8, LOW);
+  //delay(1000);
+}
+
+https://www.tinkercad.com/things/7s1vp2TdElV-luces-led
 ```
