@@ -116,4 +116,4 @@ void loop() {
   analogWrite(9, brillo);               // Ajustar brillo
 }
 ```
-<img src="" width="1024" height="550"> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/led%20potenciometro.png" width="1024" height="550"> 
