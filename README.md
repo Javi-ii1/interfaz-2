@@ -85,7 +85,7 @@ void loop() {   // Se repite infinitamente
   //delay(1000);
 }
 ```
-<img src="" width="1024" height="550"> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/luces%20led.png" width="1024" height="550"> 
 
 ### Ejercicio n°4: Luz pulsador
 https://www.tinkercad.com/things/10ZiqF8U0UE-luz-pulsador
