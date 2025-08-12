@@ -102,7 +102,7 @@ void loop() {
   }
 }
 ```
-<img src="" width="1024" height="550"> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/luz%20pulsador.png" width="1024" height="550"> 
 
 ### Ejercicio n°5: Luz potenciometro
 https://www.tinkercad.com/things/dNm8kH4w4jz-led-potenciometro
