@@ -188,3 +188,4 @@ void draw()
   ellipse(width/2, height/2, d, d);   
 }
 ```
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/Arduino_Processing.png" width="1024" height="550"/> 
