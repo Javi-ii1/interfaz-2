@@ -60,7 +60,7 @@ void loop() {
   // 🚦 Fase 4: Rojo autos, rojo peatones (tiempo intermedio)
   digitalWrite(LED_4, LOW);   // Verde peatones apagado
   digitalWrite(LED_5, HIGH);  // Rojo peatones encendido
-  delay(2000); // 2 segundos
+  //delay(2000); // 2 segundos
 }
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/semaforo.png" width="1024" height="550"/> 
