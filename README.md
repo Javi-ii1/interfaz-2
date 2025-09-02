@@ -212,32 +212,11 @@ void loop() {
 ```
 Processing
 ```js
-import processing.serial.*;
-
-Serial myPort;
-ArrayList<PVector> circles; 
-
-void setup() {
-  size(1920, 1080);
-  background(0);
-  
-  // Ajusta el nombre del puerto según tu Arduino
-  println(Serial.list());
-  myPort = new Serial(this, "/dev/cu.usbmodem1101", 9600);
-  //myPort = new Serial(this, Serial.list()[0], 9600);
-  
-  circles = new ArrayList<PVector>();
-}
-
-void draw() {
-  //background(0);
-  
-  // Dibujar círculos almacenados
-  fill(0, 0, 0);
+ fill(random(255), 0,random(255));
   //noStroke();
-  stroke(255, 0, 0);
+  stroke(random(25), 50, random (255));
   for (PVector c : circles) {
-    ellipse(c.x, c.y, 30, 30);
+    ellipse(c.x, c.y, 200, random(450));
   }
   
   // Revisar si llega algo de Arduino
