@@ -316,3 +316,6 @@ class CircleData {
   }
 }
 ```
+### Ejercicio n°9 Forifelse
+
+### Ejercicio n°10 Botonera
