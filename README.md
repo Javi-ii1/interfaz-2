@@ -339,7 +339,7 @@ void loop() {
   }
 }
 ```
-<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/Forifelse.png" width="1024" height="550"/> 
 
 ### Ejercicio n°10 Botonera
 Arduino
