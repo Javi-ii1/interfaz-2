@@ -129,7 +129,7 @@ void loop() {
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/led%20potenciometro.png" width="1024" height="550"/> 
 
-### Ejercicio n°6: Arduino_Processing
+### Ejercicio n°6: Potenciómetro + Processing
 Arduino
 ```js
 unsigned int ADCValue;
