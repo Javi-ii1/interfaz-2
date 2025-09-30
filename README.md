@@ -208,12 +208,33 @@ void loop() {
 
   if (buttonState == HIGH) {   // Botón presionado
     Serial.println(1);        // Enviar un "1" a Processing
-    delay(200);               // Evitar rebotes
+    delay(2000);               // Evitar rebotes
   }
 }
 ```
 Processing
 ```js
+import processing.serial.*;
+
+Serial myPort;
+ArrayList<PVector> circles; 
+
+void setup() {
+  size(1920, 1080);
+  background(0);
+  
+  // Ajusta el nombre del puerto según tu Arduino
+  println(Serial.list());
+  myPort = new Serial(this, "/dev/cu.usbmodem1101", 9600);
+  //myPort = new Serial(this, Serial.list()[0], 9600);
+  
+  circles = new ArrayList<PVector>();
+}
+
+void draw() {
+  //background(0);
+  
+  // Dibujar círculos almacenados
  fill(random(255), 0,random(255));
   //noStroke();
   stroke(random(25), 50, random (255));
