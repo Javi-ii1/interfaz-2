@@ -318,7 +318,7 @@ class CircleData {
   }
 }
 ```
-### Ejercicio n°9 Forifelse
+### Ejercicio n°9: Forifelse
 ```js
 int leds[] = {2, 3, 4, 5}; // Creamos un arreglo con los pines donde van conectados los LEDs
 
@@ -343,7 +343,7 @@ void loop() {
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/Forifelse.png" width="1024" height="550"/> 
 
-### Ejercicio n°10 Botonera
+### Ejercicio n°10: Botonera
 Arduino
 ```js
 // --- Configuración de botones ---
