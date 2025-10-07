@@ -257,7 +257,7 @@ void draw() {
 }
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/arduino_boton_processing.png" width="1024" height="550"/> 
-<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/arduino_boton_processing_circuito.heif" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/arduino_boton_processing_circuito.png" width="1024" height="550"/> 
 
 ### Ejercicio n°8: Arduino + boton + potenciometro + processing
 Arduino
