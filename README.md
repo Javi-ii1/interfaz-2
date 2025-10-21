@@ -2,6 +2,24 @@
 ## Pagina del curso: https://mauricixx.github.io/Interfaces/
 ## Tinkercard: https://www.tinkercad.com/dashboard/designs/circuits
 
+1.[hola mundo](#ejercicio-n-1-arduino-hola-mundo) <br>
+2.[luces led parpadeante](#ejercicio-n2-luces-led-parpadeante) <br>
+3.[luz pulsador](#ejercicio-n3-luz-pulsador) <br>
+4.[luz potenciometro](#ejercicio-n4-luz-potenciometro) <br>
+5.[semaforo en arduino](#ejercicio-n-5-semaforo-en-arduino) <br>
+6.[potenciometro processing](#ejercicio-n6-potenci%C3%B3metro--processing) <br>
+7.[arduino boton processing](#ejercicio-n7-arduino--bot%C3%B3n--processing) <br>
+8.[arduino boton processing](#ejercicio-n8-arduino--boton--potenciometro--processing) <br>
+9.[forifelse](#ejercicio-n9-forifelse) <br>
+10.[botonera](#ejercicio-n10-botonera) <br>
+11.[]() <br>
+12.[]() <br>
+13.[]() <br>
+14.[]() <br>
+15.[]() <br>
+16.[]() <br>
+17.[]() <br>
+
 ### Ejercicio n° 1 Arduino: "Hola, Mundo!"
 
 ```js
