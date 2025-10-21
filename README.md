@@ -851,4 +851,4 @@ void draw() {
   }
 }
 ```
-<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/cuerpo%2C%20video%2C%20y%20sensor%20sharp.png" width="1024" height="550"/> 
