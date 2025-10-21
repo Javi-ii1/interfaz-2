@@ -9,7 +9,7 @@
 5.[semaforo en arduino](#ejercicio-n-5-semaforo-en-arduino) <br>
 6.[potenciometro processing](#ejercicio-n6-potenci%C3%B3metro--processing) <br>
 7.[arduino boton processing](#ejercicio-n7-arduino--bot%C3%B3n--processing) <br>
-8.[arduino boton processing](#ejercicio-n8-arduino--boton--potenciometro--processing) <br>
+8.[arduino boton potenciometro processing](#ejercicio-n8-arduino--boton--potenciometro--processing) <br>
 9.[forifelse](#ejercicio-n9-forifelse) <br>
 10.[botonera](#ejercicio-n10-botonera) <br>
 11.[]() <br>
@@ -538,3 +538,215 @@ void playTrack(int index) {
 }
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/botonera.png" width="1024" height="550"/> 
+
+###Ejercicio n°11: Arduino + Processing "sensor de movimiento"
+
+Ardiuno
+```js
+// Definir el pin del sensor Sharp
+int sharpPin = A0;
+
+void setup() {
+  Serial.begin(9600); // Iniciar comunicación serial
+}
+
+void loop() {
+  int sensorValue = analogRead(sharpPin); // Leer valor del sensor
+  Serial.println(sensorValue); // Enviar valor a Processing
+  delay(100); // Esperar un momento
+}
+```
+
+processing
+```js
+import processing.serial.*;
+
+Serial myPort;  // Create object from Serial class
+static String val;    // Data received from the serial port
+int sensorVal = 0;
+
+void setup()
+{
+  background(0); 
+  //fullScreen(P3D);
+   size(1080, 720);
+   noStroke();
+  noFill();
+  String portName = "COM5";// Change the number (in this case ) to match the corresponding port number connected to your Arduino. 
+
+  myPort = new Serial(this, Serial.list()[0], 9600);
+}
+
+void draw()
+{
+  if ( myPort.available() > 0) {  // If data is available,
+  val = myPort.readStringUntil('\n'); 
+  try {
+   sensorVal = Integer.valueOf(val.trim());
+  }
+  catch(Exception e) {
+  ;
+  }
+  println(sensorVal); // read it and store it in vals!
+  }  
+ //background(0);
+  // Scale the mouseX value from 0 to 640 to a range between 0 and 175
+  float c = map(sensorVal, 0, width, 0, 400);
+  // Scale the mouseX value from 0 to 640 to a range between 40 and 300
+  float d = map(sensorVal, 0, width, 40,500);
+  fill(255, c, 0);
+  ellipse(width/2, height/2, d, d);   
+
+}
+```
+<img src="" width="1024" height="550"/> 
+
+###Ejercicio n° 12 processing: "VIDEO ascii"
+```js
+import processing.video.*;
+
+Capture cam;
+String asciiChars = "<3 * -+ :p";  // Characters from dark to light
+int cols, rows;
+int cellSize = 15; // Size of each ASCII cell
+
+void setup() {
+  size(640, 480);
+  cam = new Capture(this, 640, 480);
+  cam.start();
+  textAlign(CENTER, CENTER);
+  textSize(cellSize);
+  cols = width / cellSize;
+  rows = height / cellSize;
+}
+
+void draw() {
+  if (cam.available() == true) {
+    cam.read();
+  }
+
+  cam.loadPixels();
+  background(0);
+
+  for (int y = 0; y < rows; y++) {
+    for (int x = 0; x < cols; x++) {
+      int pixelX = x * cellSize;
+      int pixelY = y * cellSize;
+      int index = pixelX + pixelY * cam.width;
+      color c = cam.pixels[index];
+      
+      // Calculate brightness and map it to ASCII characters
+      float bright = brightness(c);
+      int charIndex = int(map(bright, 0, 255, asciiChars.length() - 1, 0));
+      String asciiChar = asciiChars.substring(charIndex, charIndex + 1);
+
+      fill(255);
+      text(asciiChar, pixelX + cellSize * 0.5, pixelY + cellSize * 0.5);
+    }
+  }
+}
+```
+<img src="" width="1024" height="550"/> 
+
+###Ejercicio n° 13 "VIDEO Glitch"
+Ardiuno
+```js
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int pot1 = analogRead(A0);  // Read first potentiometer
+  int pot2 = analogRead(A1);  // Read second potentiometer
+
+  // Send potentiometer values as comma-separated values
+  Serial.print(pot1);
+  Serial.print(",");
+  Serial.println(pot2);
+  
+  delay(50);  // Delay to reduce data rate
+}
+```
+
+processing
+```js
+import processing.serial.*;
+import processing.video.*;
+
+Serial arduinoPort;
+Movie video;
+boolean glitch = false;
+int glitchIntensity = 0; // Adjusts how many pixels are affected
+float glitchFrequency = 0; // Adjusts how frequently glitch is applied
+
+void setup() {
+  size(640, 480);
+  
+  // Set up serial communication
+  arduinoPort = new Serial(this, Serial.list()[0], 9600); // Adjust port if needed
+  
+  // Load video
+  video = new Movie(this, "video.mp4");
+  video.loop();
+}
+
+void draw() {
+  if (video.available()) {
+    video.read();
+  }
+  
+  video.loadPixels();
+  
+  // Apply glitch effect based on potentiometer values
+  if (glitch) {
+    for (int i = 0; i < video.pixels.length; i++) {
+      if (random(1) < glitchFrequency) {
+        video.pixels[i] = color(random(255), random(255), random(255), glitchIntensity);
+      }
+    }
+  }
+  
+  video.updatePixels();
+  image(video, 0, 0, width, height);
+}
+
+// Toggle glitch effect when mouse is pressed
+void mousePressed() {
+  glitch = !glitch;
+}
+
+// Read values from Arduino
+void serialEvent(Serial port) {
+  String data = port.readStringUntil('\n');
+  if (data != null) {
+    String[] values = split(trim(data), ',');
+    
+    if (values.length == 2) {
+      int pot1Value = int(values[0]);
+      int pot2Value = int(values[1]);
+      
+      // Map potentiometer values to control glitch properties
+      glitchIntensity = int(map(pot1Value, 0, 1023, 0, 255));
+      glitchFrequency = map(pot2Value, 0, 1023, 0, 0.1);  // Adjust this for sensitivity
+    }
+  }
+}
+```
+<img src="" width="1024" height="550"/> 
+
+###Ejercicio n° 14 "Sensor de humedad"
+```js
+
+void setup()
+{
+  Serial.begin(9600);// abre el puerto serial y Establece la velocidad en baudios a 9600 bps
+}
+void loop()
+{
+  int sensorValue;
+  sensorValue = analogRead(0);   //conectar el sensor de humedad al pin analogo 0
+  Serial.println(sensorValue); //imprime el valor a serial.
+  delay(200);
+}
+```
+<img src="" width="1024" height="550"/> 
