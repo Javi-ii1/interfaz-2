@@ -539,7 +539,7 @@ void playTrack(int index) {
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/botonera.png" width="1024" height="550"/> 
 
-###Ejercicio n°11: Arduino + Processing "sensor de movimiento"
+### Ejercicio n°11: Arduino + Processing "sensor de movimiento"
 
 Ardiuno
 ```js
@@ -601,7 +601,7 @@ void draw()
 ```
 <img src="" width="1024" height="550"/> 
 
-###Ejercicio n° 12 processing: "VIDEO ascii"
+### Ejercicio n° 12 processing: "VIDEO ascii"
 ```js
 import processing.video.*;
 
@@ -648,7 +648,7 @@ void draw() {
 ```
 <img src="" width="1024" height="550"/> 
 
-###Ejercicio n° 13 "VIDEO Glitch"
+### Ejercicio n° 13 "VIDEO Glitch"
 Ardiuno
 ```js
 void setup() {
@@ -734,7 +734,7 @@ void serialEvent(Serial port) {
 ```
 <img src="" width="1024" height="550"/> 
 
-###Ejercicio n° 14 "Sensor de humedad"
+### Ejercicio n° 14 "Sensor de humedad"
 ```js
 
 void setup()
