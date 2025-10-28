@@ -752,7 +752,7 @@ void loop()
 ```
 <img src="" width="1024" height="550"/> 
 
-### Ejercio n°15
+### Ejercio n°15: Cuerpo video y sensor sharp
 ```js
 // --- Sensor Sharp conectado al pin A0 ---
 int sensorPin = A0;
@@ -852,8 +852,20 @@ void draw() {
 }
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/cuerpo%2C%20video%2C%20y%20sensor%20sharp.png" width="1024" height="550"/> 
-### Ejercio
 
+### Ejercio n°16: Promedio de imagenes
+arduino
+```js
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int potValue = analogRead(A0);
+  Serial.println(potValue);
+  delay(20);
+}
+```
 processing
 ```js
 import processing.serial.*;
