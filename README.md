@@ -603,7 +603,6 @@ void draw()
 
 }
 ```
-<img src="" width="1024" height="550"/> 
 
 ### Ejercicio n°12 processing: "VIDEO ascii"
 ```js
