@@ -967,6 +967,7 @@ void loop() {
 }
 ```
 Processing
+
 js```
 // --- Librerías necesarias ---
 import processing.serial.*;
