@@ -943,7 +943,7 @@ void calcAverage(float t) {
   avgImg.updatePixels();
 }
 ```
-<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/potenciometro%20de%20imagenes.png" width="1024" height="550"/> 
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/sensor%20sharp%20circuito.png" width="1024" height="550"/> 
 
 ### Proyecto: "espacio entre texturas"
@@ -1055,5 +1055,5 @@ sensorValue = float(val);
 }
 }
 ```
-<img src="" width="1024" height="550"/>
-<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/Espacio%20entre%20texturas.png" width="1024" height="550"/>
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/circuito%20espacio%20entre%20texturas.png" width="1024" height="550"/> 
