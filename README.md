@@ -943,3 +943,5 @@ void calcAverage(float t) {
   avgImg.updatePixels();
 }
 ```
+### Ejercicio en grupo
+js```
