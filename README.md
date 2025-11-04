@@ -955,7 +955,7 @@ Desde una mirada tanto de lo micro, donde se utilizan gofrados e impresiones que
 Como una mirada desde lo macro, utilizando renderizados de nebulosas y lo relacionado al universo. 
 ```
 Arduino
-js```
+```js
 void setup() {
   Serial.begin(9600);  // Inicializamos la comunicación serial
 }
