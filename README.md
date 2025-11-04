@@ -971,102 +971,86 @@ Processing
 // --- Librerías necesarias ---
 import processing.serial.*;
 
-// --- Comunicación serial con Arduino ---
 Serial myPort;
 float sensorValue = 0;
 
-// --- Variables de imágenes ---
-PImage[] imgs;   // Arreglo para 30 imágenes
-PImage avgImg;   // Imagen resultante
+PImage[] imgs;
+PImage avgImg;
 
-// --- Configuración inicial ---
 void setup() {
-  size(1920, 1080);  // Tamaño de ventana
+size(1920, 1080);
 
-  // --- Cargar las 30 imágenes PNG nombradas del 1 al 30 ---
-  imgs = new PImage[30];
-  for (int i = 0; i < imgs.length; i++) {
-    String filename = "imagenes/" + (i + 1) + ".jpg"; // 1.png a 30.png
-    imgs[i] = loadImage(filename);
-    if (imgs[i] == null) {
-      println("No se pudo cargar: " + filename);
-    } else {
-      imgs[i].resize(width, height); // Ajustar tamaño a la ventana
-      println("Cargada: " + filename);
-    }
-  }
-
-  avgImg = createImage(width, height, RGB); // Imagen mezclada
-
-  // --- Conectar con Arduino ---
-  printArray(Serial.list()); // Mostrar puertos disponibles
-  // Ajusta el índice o nombre del puerto si es necesario:
-  myPort = new Serial(this, Serial.list()[0], 9600);
+imgs = new PImage[30];
+for (int i = 0; i < imgs.length; i++) {
+String filename = "imagenes/" + (i + 1) + ".jpg";
+imgs[i] = loadImage(filename);
+if (imgs[i] == null) {
+println("No se pudo cargar: " + filename);
+} else {
+imgs[i].resize(width, height);
+println("Cargada: " + filename);
+}
 }
 
-// --- Bucle principal ---
+avgImg = createImage(width, height, RGB);
+
+printArray(Serial.list());
+myPort = new Serial(this, Serial.list()[0], 9600);
+}
+
 void draw() {
-  background(0);
+background(0);
 
-  // Leer valor del sensor Sharp
-  readSerial();
+readSerial();
 
-  // Mapear (0–1023) al rango de las 30 imágenes (0–29)
-  float mixValue = map(sensorValue, 0, 1023, 0, imgs.length - 1);
+float mixValue = map(sensorValue, 0, 1023, 0, imgs.length - 1);
 
-  // Mezclar imágenes según el valor leído
-  avgImagesWeighted(mixValue);
+blendImagesWithTransparency(mixValue);
 
-  // Mostrar imagen resultante
-  image(avgImg, 0, 0);
+image(avgImg, 0, 0);
 
-  // Mostrar información en pantalla
-  fill(255);
-  textSize(20);
-  text("Valor sensor: " + nf(sensorValue, 1, 0), 10, height - 40);
-  text("Imagen mezclada: " + nf(mixValue, 1, 2), 10, height - 15);
+fill(255);
+textSize(20);
+text("Valor sensor: " + nf(sensorValue, 1, 0), 10, height - 40);
+text("Imagen mezclada: " + nf(mixValue, 1, 2), 10, height - 15);
 }
 
-// --- Función de mezcla entre imágenes ---
-void avgImagesWeighted(float mix) {
-  avgImg.loadPixels();
+// --- NUEVA FUNCIÓN: mezcla con transparencia visible ---
+void blendImagesWithTransparency(float mix) {
+mix = constrain(mix, 0, imgs.length - 1);
 
-  mix = constrain(mix, 0, imgs.length - 1);
+int i1 = floor(mix);
+int i2 = min(i1 + 1, imgs.length - 1);
+float t = mix - i1;
 
-  int i1 = floor(mix);                   // Imagen base
-  int i2 = min(i1 + 1, imgs.length - 1); // Imagen siguiente
-  float t = mix - i1;                    // Fracción entre ambas
+// Crea un gráfico temporal
+PGraphics pg = createGraphics(width, height);
+pg.beginDraw();
 
-  imgs[i1].loadPixels();
-  imgs[i2].loadPixels();
+// Dibuja la primera imagen con algo de transparencia
+pg.tint(255, 255 * (1.0 - t) * 0.8); // opacidad 80% ajustable
+pg.image(imgs[i1], 0, 0);
 
-  for (int i = 0; i < avgImg.pixels.length; i++) {
-    color c1 = imgs[i1].pixels[i];
-    color c2 = imgs[i2].pixels[i];
+// Superpone la segunda imagen con transparencia proporcional a 't'
+pg.tint(255, 255 * t * 0.8);
+pg.image(imgs[i2], 0, 0);
 
-    float r = lerp(red(c1), red(c2), t);
-    float g = lerp(green(c1), green(c2), t);
-    float b = lerp(blue(c1), blue(c2), t);
+pg.endDraw();
 
-    avgImg.pixels[i] = color(r, g, b);
-  }
-
-  avgImg.updatePixels();
+avgImg = pg.get(); // guarda el resultado en avgImg
 }
 
-// --- Lectura del puerto serial ---
 void readSerial() {
-  while (myPort.available() > 0) {
-    String val = myPort.readStringUntil('\n');
-    if (val != null) {
-      val = trim(val);
-      if (val.length() > 0) {
-        sensorValue = float(val);
-      }
-    }
-  }
+while (myPort.available() > 0) {
+String val = myPort.readStringUntil('\n');
+if (val != null) {
+val = trim(val);
+if (val.length() > 0) {
+sensorValue = float(val);
 }
-
+}
+}
+}
 ```
 <img src="" width="1024" height="550"/>
 <img src="" width="1024" height="550"/> 
