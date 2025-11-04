@@ -943,6 +943,9 @@ void calcAverage(float t) {
   avgImg.updatePixels();
 }
 ```
+<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/sensor%20sharp%20circuito.png" width="1024" height="550"/> 
+
 ### Proyecto: "espacio entre texturas"
 #### Alumnas: Jacqueline Peralta, Sofia Salazar y Javiera León
 ```js
