@@ -945,7 +945,7 @@ void calcAverage(float t) {
 ```
 ### Proyecto: "espacio entre texturas"
 #### Alumnas: Jacqueline Peralta, Sofia Salazar y Javiera León
-js```
+```js
 El proyecto "Espacio entre Texturas" nace desde nuestros intereses en común; la botánica y la astronomía como dos opuestos
 que se pueden relacionar y a su vez el uso del cuerpo humano como una herramienta que "controla"
 a través del sensor sharp estas dos facetas para crear una conexión entre lo micro y lo macro, lo natural y el universo.
@@ -967,7 +967,7 @@ void loop() {
 }
 ```
 Processing
-js```
+```js
 // --- Librerías necesarias ---
 import processing.serial.*;
 
@@ -1067,5 +1067,5 @@ void readSerial() {
   }
 }
 ```
-<img src="" width="1024" height="550"/> 
+<img src="" width="1024" height="550"/>
 <img src="" width="1024" height="550"/> 
