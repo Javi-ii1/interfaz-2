@@ -19,6 +19,10 @@
 15.[]() <br>
 16.[]() <br>
 17.[]() <br>
+18.[]() <br>
+19.[]() <br>
+20.[]() <br>
+
 
 ### Ejercicio n° 1 Arduino: "Hola, Mundo!"
 
@@ -646,7 +650,7 @@ void draw() {
   }
 }
 ```
-<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/VIDEO%20ascii.png" width="1024" height="550"/> 
 
 ### Ejercicio n°13: "VIDEO Glitch"
 Ardiuno
@@ -732,7 +736,7 @@ void serialEvent(Serial port) {
   }
 }
 ```
-<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/VIDEO%20Glitch.png" width="1024" height="550"/> 
 
 ### Ejercicio n°14: "Sensor de humedad"
 Arduino
@@ -750,7 +754,7 @@ void loop()
   delay(200);
 }
 ```
-<img src="" width="1024" height="550"/> 
+<img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/sensor%20de%20humedad.png" width="1024" height="550"/> 
 
 ### Ejercio n°15: Cuerpo video y sensor sharp
 ```js
