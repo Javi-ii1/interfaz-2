@@ -981,12 +981,12 @@ PImage avgImg;   // Imagen resultante
 
 // --- Configuración inicial ---
 void setup() {
-  fullScreen() ;  // Tamaño de ventana
+  size(1920, 1080);  // Tamaño de ventana
 
   // --- Cargar las 30 imágenes PNG nombradas del 1 al 30 ---
   imgs = new PImage[30];
   for (int i = 0; i < imgs.length; i++) {
-    String filename = "imagenes/" + (i + 1) + ".png"; // 1.png a 30.png
+    String filename = "imagenes/" + (i + 1) + ".jpg"; // 1.png a 30.png
     imgs[i] = loadImage(filename);
     if (imgs[i] == null) {
       println("No se pudo cargar: " + filename);
@@ -1037,37 +1037,8 @@ void avgImagesWeighted(float mix) {
   int i2 = min(i1 + 1, imgs.length - 1); // Imagen siguiente
   float t = mix - i1;                    // Fracción entre ambas
 
-  imgs[i1].loadPixels(1);
-  imgs[i2].loadPixels(2);
-  imgs[i3].loadPixels(3);
-  imgs[i4].loadPixels(4);
-  imgs[i5].loadPixels(5);
-  imgs[i6].loadPixels(6);
-  imgs[i7].loadPixels(7);
-  imgs[i8].loadPixels(8);
-  imgs[i9].loadPixels(9);
-  imgs[i10].loadPixels(10);
-  imgs[i11].loadPixels(11);
-  imgs[i12].loadPixels(12);
-  imgs[i13].loadPixels(13);
-  imgs[i14].loadPixels(14);
-  imgs[i15].loadPixels(15);
-  imgs[i16].loadPixels(16);
-  imgs[i17].loadPixels(17);
-  imgs[i18].loadPixels(18);
-  imgs[i19].loadPixels(19);
-  imgs[i20].loadPixels(20);
-  imgs[i21].loadPixels(21);
-  imgs[i22].loadPixels(22);
-  imgs[i23].loadPixels(23);
-  imgs[i24].loadPixels(24);
-  imgs[i25].loadPixels(25);
-  imgs[i26].loadPixels(26);
-  imgs[i27].loadPixels(27);
-  imgs[i28].loadPixels(28);
-  imgs[i29].loadPixels(29);
-  imgs[i30].loadPixels(30);
-  
+  imgs[i1].loadPixels();
+  imgs[i2].loadPixels();
 
   for (int i = 0; i < avgImg.pixels.length; i++) {
     color c1 = imgs[i1].pixels[i];
@@ -1095,6 +1066,7 @@ void readSerial() {
     }
   }
 }
+
 ```
 <img src="" width="1024" height="550"/>
 <img src="" width="1024" height="550"/> 
