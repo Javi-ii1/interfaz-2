@@ -12,16 +12,14 @@
 8.[arduino boton potenciometro processing](#ejercicio-n8-arduino--boton--potenciometro--processing) <br>
 9.[forifelse](#ejercicio-n9-forifelse) <br>
 10.[botonera](#ejercicio-n10-botonera) <br>
-11.[]() <br>
-12.[]() <br>
-13.[]() <br>
-14.[]() <br>
-15.[]() <br>
-16.[]() <br>
-17.[]() <br>
-18.[]() <br>
-19.[]() <br>
-20.[]() <br>
+11.[Arduino + Processing "sensor de movimiento](#ejercicio-n11-arduino--processing-sensor-de-movimiento) <br>
+12.[processing "VIDEO ascii](#ejercicio-n12-processing-video-ascii) <br>
+13.[VIDEO Glitch](#ejercicio-n13-video-glitch) <br>
+14.[Sensor de humedad](#ejercicio-n14-sensor-de-humedad) <br>
+15.[Cuerpo video y sensor sharp](#ejercio-n15-cuerpo-video-y-sensor-sharp) <br>
+16.[Promedio de imagenes](#ejercio-n16-promedio-de-imagenes) <br>
+17.[Proyecto: "espacio entre texturas"](#proyecto-espacio-entre-texturas) <br>
+
 
 
 ### Ejercicio n° 1 Arduino: "Hola, Mundo!"
