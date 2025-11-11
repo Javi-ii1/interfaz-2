@@ -1057,3 +1057,136 @@ sensorValue = float(val);
 ```
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/Espacio%20entre%20texturas.png" width="1024" height="550"/>
 <img src="https://github.com/Javi-ii1/interfaz-2/blob/main/img/circuito%20espacio%20entre%20texturas.png" width="1024" height="550"/> 
+
+```js
+// --- Librerías necesarias ---
+import processing.serial.*;
+import java.io.File;
+
+// --- Comunicación serial con Arduino ---
+Serial myPort;
+float potValue = 0;
+
+// --- Variables de imágenes ---
+PImage[] imgs;     // Arreglo con las imágenes cargadas
+PImage avgImg;     // Imagen interpolada entre dos
+PImage blended;    // Imagen acumulada (blend progresivo)
+
+// --- Control del blend ---
+float blendAmount = 0.05; // velocidad del fundido (0.0 a 1.0)
+
+// --- Configuración inicial ---
+void setup() {
+  size(1920, 1080);
+  imgs = loadImagesFromFolder("imagenes");
+  println("Imágenes cargadas: " + imgs.length);
+ 
+  // Redimensionar todas las imágenes al tamaño del lienzo
+  for (int i = 0; i < imgs.length; i++) {
+    imgs[i].resize(width, height);
+  }
+
+  avgImg = createImage(width, height, RGB);
+  blended = createImage(width, height, RGB);
+ 
+  // --- Conexión con Arduino ---
+  printArray(Serial.list());
+  myPort = new Serial(this, Serial.list()[0], 9600);
+}
+
+// --- Bucle principal ---
+void draw() {
+  background(0);
+  readSerial();
+
+  if (imgs == null || imgs.length < 2) return;
+
+  // Mapear el valor del potenciómetro a índice de imágenes
+  float mixValue = map(potValue, 0, 1023, 0, imgs.length - 1);
+ 
+  // También mapearlo a velocidad de blend
+  blendAmount = map(potValue, 0, 1023, 0.01, 0.3);
+
+  // Calcular la mezcla entre dos imágenes
+  avgImagesWeighted(mixValue);
+
+  // Aplicar el blend acumulativo entre la imagen nueva y la anterior
+  blended.loadPixels();
+  avgImg.loadPixels();
+  for (int i = 0; i < blended.pixels.length; i++) {
+    color c1 = blended.pixels[i];
+    color c2 = avgImg.pixels[i];
+    float r = lerp(red(c1), red(c2), blendAmount);
+    float g = lerp(green(c1), green(c2), blendAmount);
+    float b = lerp(blue(c1), blue(c2), blendAmount);
+    blended.pixels[i] = color(r, g, b);
+  }
+  blended.updatePixels();
+
+  // Mostrar resultado
+  image(blended, 0, 0);
+
+  // Texto de depuración
+  fill(255);
+  text("Valor pot: " + nf(potValue, 1, 0), 10, height - 30);
+  text("Velocidad blend: " + nf(blendAmount, 1, 2), 10, height - 10);
+}
+
+// --- Función que calcula el promedio entre dos imágenes ---
+void avgImagesWeighted(float mix) {
+  avgImg.loadPixels();
+
+  mix = constrain(mix, 0, imgs.length - 1);
+  int i1 = floor(mix);
+  int i2 = min(i1 + 1, imgs.length - 1);
+  float t = mix - i1;
+
+  imgs[i1].loadPixels();
+  imgs[i2].loadPixels();
+
+  for (int i = 0; i < avgImg.pixels.length; i++) {
+    color c1 = imgs[i1].pixels[i];
+    color c2 = imgs[i2].pixels[i];
+    float r = lerp(red(c1), red(c2), t);
+    float g = lerp(green(c1), green(c2), t);
+    float b = lerp(blue(c1), blue(c2), t);
+    avgImg.pixels[i] = color(r, g, b);
+  }
+  avgImg.updatePixels();
+}
+
+// --- Leer valor desde Arduino ---
+void readSerial() {
+  while (myPort != null && myPort.available() > 0) {
+    String val = myPort.readStringUntil('\n');
+    if (val != null) {
+      val = trim(val);
+      if (val.length() > 0) {
+        potValue = float(val);
+      }
+    }
+  }
+}
+
+// --- Cargar todas las imágenes desde una carpeta ---
+PImage[] loadImagesFromFolder(String folderName) {
+  String path = sketchPath("data/" + folderName);
+  File folder = new File(path);
+  File[] files = folder.listFiles();
+
+  if (files == null) {
+    println("Carpeta no encontrada: " + path);
+    return null;
+  }
+
+  ArrayList<PImage> loaded = new ArrayList<PImage>();
+  for (File f : files) {
+    String fname = f.getName().toLowerCase();
+    if (fname.endsWith(".jpg") || fname.endsWith(".png")) {
+      PImage img = loadImage(folderName + "/" + f.getName());
+      if (img != null) loaded.add(img);
+    }
+  }
+  return loaded.toArray(new PImage[loaded.size()]);
+}
+```
