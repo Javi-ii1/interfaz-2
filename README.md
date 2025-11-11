@@ -1190,3 +1190,183 @@ PImage[] loadImagesFromFolder(String folderName) {
   return loaded.toArray(new PImage[loaded.size()]);
 }
 ```
+```js
+// --- Librerías necesarias ---
+import processing.serial.*;
+import java.io.File;
+
+// --- Comunicación serial con Arduino ---
+Serial myPort;
+float potValue = 0;
+
+// --- Variables de imágenes ---
+PImage[] imgs;     
+PImage avgImg;     
+PImage blended;    
+
+// --- Control del blend y color ---
+float blendAmount = 0.05;
+float contrastLevel = 1.15;
+float hueShift = 0;
+float saturationBoost = 1.3;
+float brightnessBoost = 1.4;  // más fuerte para compensar oscuridad
+
+// --- Configuración inicial ---
+void setup() {
+  size(1920, 1080);
+  colorMode(RGB, 255);
+  
+  imgs = loadImagesFromFolder("imagenes");
+  println("Imágenes cargadas: " + imgs.length);
+
+  for (int i = 0; i < imgs.length; i++) {
+    imgs[i].resize(width, height);
+  }
+
+  avgImg = createImage(width, height, RGB);
+  blended = createImage(width, height, RGB);
+
+  // Conexión con Arduino
+  printArray(Serial.list());
+  myPort = new Serial(this, Serial.list()[0], 9600);
+}
+
+// --- Bucle principal ---
+void draw() {
+  background(0);
+  readSerial();
+
+  if (imgs == null || imgs.length < 2) return;
+
+  float mixValue = map(potValue, 0, 1023, 0, imgs.length - 1);
+  blendAmount = map(potValue, 0, 1023, 0.02, 0.25);
+
+  // Color dinámico
+  hueShift = map(potValue, 0, 1023, -60, 60);
+  saturationBoost = map(potValue, 0, 1023, 1.0, 1.5);
+  brightnessBoost = map(potValue, 0, 1023, 1.0, 1.6);
+
+  avgImagesWeighted(mixValue);
+  applyContrast(avgImg, contrastLevel);
+  applyColorEnhancement(avgImg, hueShift, saturationBoost, brightnessBoost);
+
+  // Mezcla acumulativa más ligera (para no oscurecer)
+  blended.loadPixels();
+  avgImg.loadPixels();
+  for (int i = 0; i < blended.pixels.length; i++) {
+    color c1 = blended.pixels[i];
+    color c2 = avgImg.pixels[i];
+    float r = lerp(red(c1), red(c2), blendAmount);
+    float g = lerp(green(c1), green(c2), blendAmount);
+    float b = lerp(blue(c1), blue(c2), blendAmount);
+
+    // Normalizar brillo para evitar apagado
+    r = constrain(r * 1.05, 0, 255);
+    g = constrain(g * 1.05, 0, 255);
+    b = constrain(b * 1.05, 0, 255);
+
+    blended.pixels[i] = color(r, g, b);
+  }
+  blended.updatePixels();
+
+  image(blended, 0, 0);
+
+  fill(255);
+  text("Sensor: " + nf(potValue, 1, 0), 10, height - 40);
+  text("HueShift: " + nf(hueShift, 1, 1), 10, height - 25);
+  text("Brillo: " + nf(brightnessBoost, 1, 2), 10, height - 10);
+}
+
+// --- Mezcla entre imágenes ---
+void avgImagesWeighted(float mix) {
+  avgImg.loadPixels();
+  mix = constrain(mix, 0, imgs.length - 1);
+  int i1 = floor(mix);
+  int i2 = min(i1 + 1, imgs.length - 1);
+  float t = mix - i1;
+
+  imgs[i1].loadPixels();
+  imgs[i2].loadPixels();
+
+  for (int i = 0; i < avgImg.pixels.length; i++) {
+    color c1 = imgs[i1].pixels[i];
+    color c2 = imgs[i2].pixels[i];
+    float r = lerp(red(c1), red(c2), t);
+    float g = lerp(green(c1), green(c2), t);
+    float b = lerp(blue(c1), blue(c2), t);
+    avgImg.pixels[i] = color(r, g, b);
+  }
+  avgImg.updatePixels();
+}
+
+// --- Contraste ---
+void applyContrast(PImage img, float contrast) {
+  img.loadPixels();
+  float factor = (259 * (contrast * 255 + 255)) / (255 * (259 - contrast * 255));
+  for (int i = 0; i < img.pixels.length; i++) {
+    float r = red(img.pixels[i]);
+    float g = green(img.pixels[i]);
+    float b = blue(img.pixels[i]);
+
+    r = factor * (r - 130) + 128;
+    g = factor * (g - 125) + 128;
+    b = factor * (b - 110) + 128;
+
+    img.pixels[i] = color(constrain(r, 0, 255), constrain(g, 0, 255), constrain(b, 0, 255));
+  }
+  img.updatePixels();
+}
+
+// --- Colores más vivos ---
+void applyColorEnhancement(PImage img, float hueShift, float satBoost, float brightBoost) {
+  colorMode(HSB, 255);
+  img.loadPixels();
+  for (int i = 0; i < img.pixels.length; i++) {
+    color c = img.pixels[i];
+    float h = hue(c);
+    float s = saturation(c);
+    float b = brightness(c);
+
+    h = (h + hueShift + 255) % 255;
+    s = constrain(s * satBoost, 0, 255);
+    b = constrain(b * brightBoost, 0, 255);
+
+    img.pixels[i] = color(h, s, b);
+  }
+  img.updatePixels();
+  colorMode(RGB, 255); // volver a RGB
+}
+
+// --- Leer valor desde Arduino ---
+void readSerial() {
+  while (myPort != null && myPort.available() > 0) {
+    String val = myPort.readStringUntil('\n');
+    if (val != null) {
+      val = trim(val);
+      if (val.length() > 0) potValue = float(val);
+    }
+  }
+}
+
+// --- Cargar imágenes ---
+PImage[] loadImagesFromFolder(String folderName) {
+  String path = sketchPath("data/" + folderName);
+  File folder = new File(path);
+  File[] files = folder.listFiles();
+
+  if (files == null) {
+    println("Carpeta no encontrada: " + path);
+    return null;
+  }
+
+  ArrayList<PImage> loaded = new ArrayList<PImage>();
+  for (File f : files) {
+    String fname = f.getName().toLowerCase();
+    if (fname.endsWith(".jpg") || fname.endsWith(".png")) {
+      PImage img = loadImage(folderName + "/" + f.getName());
+      if (img != null) loaded.add(img);
+    }
+  }
+  return loaded.toArray(new PImage[loaded.size()]);
+}
+```
